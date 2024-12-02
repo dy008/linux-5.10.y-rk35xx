@@ -28,9 +28,7 @@
 		mmc0 = &sdhci;
 	};
 
-	chosen: chosen {
-		bootargs = "earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 coherent_pool=1m irqchip.gicv3_pseudo_nmi=0";
-	};
+	/delete-node/ chosen;
 
 	leds {
 		compatible = "gpio-leds";
@@ -233,14 +231,6 @@
 		rockchip,jack-det;
 	};
 
-};
-
-&av1d {
-	status = "okay";
-};
-
-&av1d_mmu {
-	status = "okay";
 };
 
 &cpu_l0 {
@@ -451,17 +441,6 @@
 &display_subsystem {
 	clocks = <&hdptxphy_hdmi_clk1>;
 	clock-names = "hdmi1_phy_pll";
-
-	route {
-		route_hdmi1: route-hdmi1 {
-			status = "okay";
-			logo,uboot = "logo.bmp";
-			logo,kernel = "logo_kernel.bmp";
-			logo,mode = "center";
-			charge_logo,mode = "center";
-			connect = <&vp0_out_hdmi1>;
-		};
-	};
 };
 
 &hdptxphy_hdmi_clk1 {
@@ -499,6 +478,14 @@
 	status = "okay";
 };
 
+&route_hdmi1 {
+	status = "okay";
+};
+
+&hdptxphy_hdmi1 {
+	status = "okay";
+};
+
 &hdmi1_sound {
 	status = "okay";
 };
@@ -516,15 +503,6 @@
 	hdmirx-det-gpios = <&gpio1 RK_PD5 GPIO_ACTIVE_LOW>;
 	pinctrl-0 = <&hdmim1_rx &hdmirx_det>;
 	pinctrl-names = "default";
-};
-
-/*
-&hdptxphy_hdmi0 {
-	status = "okay";
-};
-*/
-&hdptxphy_hdmi1 {
-	status = "okay";
 };
 
 &i2s5_8ch {
@@ -553,27 +531,27 @@
 
 /* vp0 & vp1 splice for 8K output */
 &vp0 {
-	cursor-win-id=<ROCKCHIP_VOP2_ESMART0>;
 	rockchip,plane-mask = <(1 << ROCKCHIP_VOP2_CLUSTER0 | 1 << ROCKCHIP_VOP2_ESMART0)>;
 	rockchip,primary-plane = <ROCKCHIP_VOP2_CLUSTER0>;
+	cursor-win-id = <ROCKCHIP_VOP2_ESMART0>;
 };
 
 &vp1 {
-	cursor-win-id=<ROCKCHIP_VOP2_ESMART1>;
 	rockchip,plane-mask = <(1 << ROCKCHIP_VOP2_CLUSTER1 | 1 << ROCKCHIP_VOP2_ESMART1)>;
 	rockchip,primary-plane = <ROCKCHIP_VOP2_CLUSTER1>;
+	cursor-win-id = <ROCKCHIP_VOP2_ESMART1>;
 };
 
 &vp2 {
-	cursor-win-id=<ROCKCHIP_VOP2_ESMART2>;
 	rockchip,plane-mask = <(1 << ROCKCHIP_VOP2_CLUSTER2 | 1 << ROCKCHIP_VOP2_ESMART2)>;
 	rockchip,primary-plane = <ROCKCHIP_VOP2_CLUSTER2>;
+	cursor-win-id = <ROCKCHIP_VOP2_ESMART2>;
 };
 
 &vp3 {
-	cursor-win-id=<ROCKCHIP_VOP2_ESMART3>;
 	rockchip,plane-mask = <(1 << ROCKCHIP_VOP2_CLUSTER3 | 1 << ROCKCHIP_VOP2_ESMART3)>;
 	rockchip,primary-plane = <ROCKCHIP_VOP2_CLUSTER3>;
+	cursor-win-id = <ROCKCHIP_VOP2_ESMART3>;
 };
 
 &i2c1 {
@@ -983,13 +961,13 @@
 	status = "okay";
 };
 
-&dp0_in_vp0 {
+&dp0_in_vp2 {
 	status = "okay";
 };
 
 &route_dp0 {
 	status = "okay";
-	connect = <&vp0_out_dp0>;
+	connect = <&vp2_out_dp0>;
 };
 
 &spdif_tx2 {
