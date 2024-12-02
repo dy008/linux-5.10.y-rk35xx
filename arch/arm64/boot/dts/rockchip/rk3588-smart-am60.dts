@@ -107,7 +107,6 @@
 	vbus5v0_typec: vbus5v0-typec {
 		compatible = "regulator-fixed";
 		enable-active-high;
-		regulator-boot-on;
 		// gpio = <0xe3 0x0e 0x00>;
 		gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
@@ -172,6 +171,8 @@
 		//配置：WIFI_HOST_WAKE
 		// rockchip,pins = <0x03 0x13 0x00 0x162>;
 		WIFI,host_wake_irq = <&gpio3 RK_PC3 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&gpio_wifi_wake>;
 		status = "okay";
 	};
 
@@ -482,7 +483,7 @@
 
 &hdmi0 {
 	status = "okay";
-	cec-enable = "true";
+	cec-enable;
 	// enable-gpios = <0xe5 0x09 0x00>;
 	enable-gpios = <&gpio4 RK_PB1 GPIO_ACTIVE_HIGH>;
 	pinctrl-names = "default";
@@ -499,7 +500,7 @@
 
 &hdmi1 {
 	status = "okay";
-	cec-enable = "true";
+	cec-enable;
 	// enable-gpios = <0xe5 0x0a 0x00>;
 	enable-gpios = <&gpio4 RK_PB2 GPIO_ACTIVE_HIGH>;
 	pinctrl-names = "default";
