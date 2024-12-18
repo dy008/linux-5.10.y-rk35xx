@@ -752,6 +752,7 @@
 	pinctrl-0 = <&i2c2m4_xfer>;
 
 	it6621@4f {
+			reg = <0x4f>;
 			compatible = "ite,it662x";
 			interrupt-parent = <&gpio4>;
 			interrupts = <RK_PA3 IRQ_TYPE_LEVEL_HIGH>;
